@@ -1,0 +1,73 @@
+<br><br>
+
+<div *ngIf = "addForm">
+  <h3>Form Add</h3>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>:</td>
+      <td><input type="text"  #name name="" value=""></td>
+    </tr>
+    <tr>
+      <td>Club</td>
+      <td>:</td>
+      <td><input type="text" #rank name="" value=""></td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><button (click)="createNinjas(rank, name)">Save</button></td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf = "editForm">
+  <h3>Form Update</h3>
+  <table *ngFor = "let ninjasIdVal of ninjasId">
+    <tr>
+      <td>Name</td>
+      <td>:</td>
+      <td><input type="text" [value] = "ninjasIdVal.name" #nameUpdate value=""></td>
+    </tr>
+    <tr>
+      <td>Club</td>
+      <td>:</td>
+      <td><input type="text" [value] = "ninjasIdVal.rank" #rankUpdate value=""></td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <button (click)="updateNinjas(idUpdate, rankUpdate, nameUpdate)">Update</button>
+        <input type="hidden" [value] = "ninjasIdVal._id" #idUpdate value="">
+        <button (click) = "cancelUpdate()">Cancel</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br><br>
+<table border="1" cellspacing="0" width="600" height="100">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Club</th>
+    <th>Act</th>
+  </tr>
+
+  <tr *ngFor = "let ninja of ninjas">
+    <td>{{ninja._id}}</td>
+    <td>{{ninja.name}}</td>
+    <td>{{ninja.rank}}</td>
+    <td>
+      <a href="javascript:void(0)" disabled (click) = "getNinjasId(ninja._id);">Edit</a> |
+      <a href="javascript:void(0)" (click) = "deleteNinjas(ninja._id);">Delete</a>
+    </td>
+  </tr>
+</table>
